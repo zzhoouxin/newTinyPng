@@ -1,5 +1,5 @@
 ---
-description: 基于tinyPng图片压缩工具
+description: 基于tinyPng图片压缩工具。突破官网单个IP20数量限制
 ---
 
 # tinypngjs
@@ -7,6 +7,7 @@ description: 基于tinyPng图片压缩工具
 ## 安装
 
 ```bash
+目前为推送到npm     可直接查看demo
 npm install 
 node example.js
 ```
