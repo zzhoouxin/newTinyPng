@@ -7,7 +7,8 @@ description: 基于tinyPng图片压缩工具
 ## 安装
 
 ```bash
-目前还没推到npm仓库 哈哈
+npm install 
+node example.js
 ```
 
 
