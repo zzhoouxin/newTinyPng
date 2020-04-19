@@ -56,7 +56,6 @@ class Files {
         });
     }
     static getTree(src, istree, folder,testfun) {
-        debugger
         if (!folder) {
             folder = [];
         }
