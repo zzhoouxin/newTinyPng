@@ -85,7 +85,8 @@ class TinyPng {
             } else {
               this.saveImg(out, obj)
                 .then(saveRes => {
-                  resolve(saveRes);
+                  let fileName = this.getNameByUrl(from)
+                  resolve({...saveRes,fileName});
                 })
                 .catch(error => {
                   console.log('error');
@@ -133,9 +134,9 @@ class TinyPng {
     var compressed = 0;
     for (var i in imagelist) {
       let curpath = imagelist[i].path;
+      //这边在判断一下是否是图片文件吧--
       let relative = path.relative(from, curpath);
       let outputPath = path.resolve(out, relative);
-
       TinyPng.compressImg(curpath, outputPath)
         .then(res => {
           compressed++;
@@ -145,10 +146,15 @@ class TinyPng {
         })
         .catch(err => {
           compressed++;
-          onprogress(false, compressed, total, err);
+          onprogress(false, compressed, total,err);
         });
     }
     return true;
+  }
+
+  static getNameByUrl (url){
+   let index =  url.split("/").length;
+   return url.split("/")[index-1]
   }
 
   /**
@@ -193,6 +199,12 @@ class TinyPng {
     var imgs = await Files.getTree(file, false, null, function(file) {
       return !!path.extname(file) && !exts.includes(path.extname(file));
     });
+    let removeIndex = imgs.findIndex((value)=>{
+      return value.name === '.DS_Store';
+    })
+    if(removeIndex !== -1){
+      imgs.splice(removeIndex,1)
+    }
     return imgs;
   }
 }
